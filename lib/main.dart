@@ -172,11 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FirstRoute()),
-                        );
+                            Navigator.of(context).push(_createRoute());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -210,11 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FirstRoute()),
-                        );
+                        Navigator.of(context).push(_createRoute());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
