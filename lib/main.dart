@@ -19,9 +19,8 @@ Route _createRoute() {
       const curve = Curves.ease;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
+      return ScaleTransition(
+        scale: animation,
         child: child,
       );
     },
@@ -40,6 +39,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
+
     );
   }
 }
@@ -187,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           MenuOption(
                             title: "Pontos Taxi",
-                            iconData: FontAwesomeIcons.cab,
+                            iconData: FontAwesomeIcons.taxi,
                             selected: false,
                           ),
                           SizedBox(
