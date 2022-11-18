@@ -10,6 +10,24 @@ void main() {
   runApp(MyApp());
 }
 
+Route _createRoute() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const FirstRoute(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -118,11 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FirstRoute()),
-                        );
+                        Navigator.of(context).push(_createRoute());
+
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
