@@ -19,8 +19,8 @@ Route _createRoute() {
       const curve = Curves.ease;
 
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      return ScaleTransition(
-        scale: animation,
+      return FadeTransition(
+        opacity: animation,
         child: child,
       );
     },
@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           MenuOption(
                             title: "Ótica",
                             iconData: FontAwesomeIcons.eye,
-                            selected: true,
+                            selected: false,
                           ),
                           SizedBox(
                             width: 24,
@@ -196,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           MenuOption(
                             title: "Bar",
                             iconData: FontAwesomeIcons.martiniGlass,
-                            selected: true,
+                            selected: false,
                           ),
                         ],
                       ),
