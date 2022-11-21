@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teste_grafos/bottom_item.dart';
 import 'package:teste_grafos/menu_option.dart';
 import 'package:teste_grafos/recommend_card.dart';
-import 'package:teste_grafos/test_rota.dart';
+import 'package:teste_grafos/casas_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +12,7 @@ void main() {
 
 Route _createRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const FirstRoute(),
+    pageBuilder: (context, animation, secondaryAnimation) => const PaginaCasas(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;
@@ -303,7 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 BottomItem(
                   title: "Home",
                   iconData: Icons.home,
-                  selected: true,
+                  selected: false,
                 ),
                 SizedBox(
                   width: 4,
