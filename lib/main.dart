@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teste_grafos/bottom_item.dart';
+import 'package:teste_grafos/casas_otica.dart';
 import 'package:teste_grafos/menu_option.dart';
 import 'package:teste_grafos/recommend_card.dart';
 import 'package:teste_grafos/casas_page.dart';
@@ -13,6 +14,22 @@ void main() {
 Route _createRoute() {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => const PaginaCasas(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+  );
+}
+Route _createRoute2() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => const PaginaCasas2(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       const begin = Offset(0.0, 1.0);
       const end = Offset.zero;
@@ -145,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           MenuOption(
                             title: "Ótica",
                             iconData: FontAwesomeIcons.eye,
-                            selected: false,
+                            selected: true,
                           ),
                           SizedBox(
                             width: 24,
@@ -172,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                            Navigator.of(context).push(_createRoute());
+                            Navigator.of(context).push(_createRoute2());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -186,8 +203,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: 24,
                           ),
                           MenuOption(
-                            title: "Pontos Taxi",
-                            iconData: FontAwesomeIcons.taxi,
+                            title: "Futebol",
+                            iconData: FontAwesomeIcons.soccerBall,
                             selected: false,
                           ),
                           SizedBox(
