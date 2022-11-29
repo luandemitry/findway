@@ -15,13 +15,13 @@ class MenuOption extends StatelessWidget {
         aspectRatio: 1,
         child: Container(
           decoration: BoxDecoration(
-            color: selected ? Color(0xFF2d4d25) : Colors.grey[200],
+            color: selected ? Color(0xFFf345e2) : Colors.grey[200],
             borderRadius: BorderRadius.all(
               Radius.circular(25),
             ),
             boxShadow: [
               BoxShadow(
-                color: selected ? Color(0xFF2d4d25).withOpacity(0.2) : Colors.transparent,
+                color: selected ? Color(0xFFf345e2).withOpacity(0.2) : Colors.transparent,
                 spreadRadius: 4,
                 blurRadius: 7,
                 offset: Offset(0, 3),

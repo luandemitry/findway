@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teste_grafos/repositories/casa_repo.dart';
 
 
-const primaryColor = Color(0xFF2d4d25);
+const primaryColor = Color(0xFFf345e2);
 
 class PaginaCasas2 extends StatelessWidget {
   const PaginaCasas2({Key? key}) : super(key: key);
