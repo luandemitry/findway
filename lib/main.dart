@@ -10,7 +10,23 @@ import 'package:teste_grafos/map.dart';
 void main() {
   runApp(MyApp());
 }
+Route _rotaHome () {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        MyHomePage(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
 
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+  );
+}
 Route _rotaPagina () {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) =>
@@ -79,45 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
-        child: Material(
-          elevation: 2,
-          child: Padding(
-            padding: EdgeInsets.only(left: 16, right: 16, top: 32, bottom: 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Icon(
-                  Icons.menu,
-                  color: Color(0xFFf345e2),
-                ),
-                SizedBox(
-                  height: 70,
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                  ),
-                ),
-                Stack(children: <Widget>[
-                  Icon(
-                    Icons.notifications_none,
-                    color: Colors.grey[400],
-                  ),
-                  Positioned(
-                    top: 0.0,
-                    right: 0.0,
-                    child: Icon(
-                      Icons.brightness_1,
-                      size: 8.0,
-                      color: Color(0xFFf345e2),
-                    ),
-                  ),
-                ]),
-              ],
-            ),
-          ),
-        ),
+      drawer: const NavigationDrawer(),
+      appBar: AppBar(
+        title: const Text('FindWay'),
+        backgroundColor: Colors.pinkAccent,
       ),
       body: Center(
         child: _page != 0 ? screens[_page] :
@@ -318,4 +299,57 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) => Drawer(
+    child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          buildHeader(context),
+          buildMenuItems(context),
+        ],
+      ),
+    ),
+  );
+  Widget buildHeader(BuildContext context ) => Container(
+    padding: EdgeInsets.only(
+      top: MediaQuery.of(context).padding.top,
+    ),
+  );
+
+  Widget buildMenuItems(BuildContext context) => Wrap(
+    runSpacing: 16,
+    children: [
+      ListTile(
+        leading: const Icon(Icons.home_outlined),
+        title: const Text('Home'),
+        onTap: ()=>
+            Navigator.of(context).push(_rotaHome()),
+      ),
+      ListTile(
+        leading: const Icon(Icons.map_outlined),
+        title: const Text('Mapa'),
+        onTap: () =>
+            Navigator.of(context).push(_rotaHome())
+      ),
+      ListTile(
+        leading: const Icon(Icons.settings),
+        title: const Text('Configurações'),
+        onTap: (){},
+      ),
+      ListTile(
+        leading: const Icon(Icons.notifications),
+        title: const Text('Notificações'),
+        onTap: (){},
+      ),
+      ListTile(
+        leading: const Icon(Icons.favorite),
+        title: const Text('Favoritos'),
+        onTap: (){},
+      ),
+    ],
+  );
+}
