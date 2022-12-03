@@ -70,7 +70,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
@@ -315,41 +314,55 @@ class NavigationDrawer extends StatelessWidget {
     ),
   );
   Widget buildHeader(BuildContext context ) => Container(
+    color: Colors.pinkAccent,
     padding: EdgeInsets.only(
-      top: MediaQuery.of(context).padding.top,
+      top: 24 + MediaQuery.of(context).padding.top,
+      bottom: 24
+    ),
+    child: Column(
+      children: [CircleAvatar(
+        radius: 52,
+        backgroundImage: NetworkImage('https://www.pexels.com/photo/city-sunset-man-people-14520644/'),
+      ),
+        Text('Maria Joaquina', style: TextStyle(fontSize: 16, color: Colors.white),)
+      ],
     ),
   );
 
-  Widget buildMenuItems(BuildContext context) => Wrap(
-    runSpacing: 16,
-    children: [
-      ListTile(
-        leading: const Icon(Icons.home_outlined),
-        title: const Text('Home'),
-        onTap: ()=>
-            Navigator.of(context).push(_rotaHome()),
-      ),
-      ListTile(
-        leading: const Icon(Icons.map_outlined),
-        title: const Text('Mapa'),
-        onTap: () =>
-            Navigator.of(context).push(_rotaHome())
-      ),
-      ListTile(
-        leading: const Icon(Icons.settings),
-        title: const Text('Configurações'),
-        onTap: (){},
-      ),
-      ListTile(
-        leading: const Icon(Icons.notifications),
-        title: const Text('Notificações'),
-        onTap: (){},
-      ),
-      ListTile(
-        leading: const Icon(Icons.favorite),
-        title: const Text('Favoritos'),
-        onTap: (){},
-      ),
-    ],
+  Widget buildMenuItems(BuildContext context) => Container(
+    padding: const EdgeInsets.all(24),
+    child: Wrap(
+      runSpacing: 16,
+      children: [
+        ListTile(
+          leading: const Icon(Icons.home_outlined),
+          title: const Text('Home'),
+          onTap: ()=>
+              Navigator.of(context).push(_rotaHome()),
+        ),
+        ListTile(
+          leading: const Icon(Icons.map_outlined),
+          title: const Text('Mapa'),
+          onTap: () =>
+              Navigator.of(context).push(_rotaHome())
+        ),
+        Divider(color: Colors.black54),
+        ListTile(
+          leading: const Icon(Icons.settings),
+          title: const Text('Configurações'),
+          onTap: (){},
+        ),
+        ListTile(
+          leading: const Icon(Icons.notifications),
+          title: const Text('Notificações'),
+          onTap: (){},
+        ),
+        ListTile(
+          leading: const Icon(Icons.favorite),
+          title: const Text('Favoritos'),
+          onTap: (){},
+        ),
+      ],
+    ),
   );
 }
