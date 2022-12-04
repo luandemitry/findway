@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:teste_grafos/casas_otica.dart';
+import 'package:teste_grafos/casas_restaurante.dart';
 import 'package:teste_grafos/menu_option.dart';
 import 'package:teste_grafos/recommend_card.dart';
 import 'package:teste_grafos/casas_page.dart';
 import 'package:teste_grafos/map.dart';
+import 'package:teste_grafos/teste.dart';
 
 void main() {
   runApp(MyApp());
@@ -63,6 +65,41 @@ Route _rotaOtica() {
   );
 }
 
+Route _rotaRestaurante() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+    const PaginaCasas3(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+  );
+}
+Route _rotaMapa() {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) =>
+      MapSample(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      const begin = Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+      return FadeTransition(
+        opacity: animation,
+        child: child,
+      );
+    },
+  );
+}
+
 class MyApp extends StatelessWidget {
 
   @override
@@ -88,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _page = 0;
   final screens = [
     MyHomePage(),
-    PaginaCasas3(),
+    PaginaCasas4(),
   ];
 
   @override
@@ -121,24 +158,24 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           MenuOption(
-                            title: "Ótica",
-                            iconData: FontAwesomeIcons.eye,
+                            title: "Hospital",
+                            iconData: FontAwesomeIcons.hospital,
                             selected: true,
                           ),
                           SizedBox(
                             width: 24,
                           ),
                           MenuOption(
-                            title: "Restaurante",
-                            iconData: FontAwesomeIcons.utensils,
+                            title: "Hotéis",
+                            iconData: FontAwesomeIcons.house,
                             selected: false,
                           ),
                           SizedBox(
                             width: 24,
                           ),
                           MenuOption(
-                            title: "Universidade",
-                            iconData: FontAwesomeIcons.book,
+                            title: "Terminal",
+                            iconData: FontAwesomeIcons.bus,
                             selected: false,
                           ),
                         ],
@@ -155,8 +192,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           MenuOption(
-                            title: "Terminal",
-                            iconData: FontAwesomeIcons.bus,
+                            title: ("Universidade"),
+                            iconData: FontAwesomeIcons.book,
                             selected: false,
                           ),
                           SizedBox(
@@ -165,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           MenuOption(
                             title: "Futebol",
                             iconData: FontAwesomeIcons.futbol,
-                            selected: false,
+                            selected: true,
                           ),
                           SizedBox(
                             width: 24,
@@ -183,15 +220,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(_rotaPagina());
+                        Navigator.of(context).push(_rotaRestaurante());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           MenuOption(
-                            title: "Hotéis",
-                            iconData: FontAwesomeIcons.house,
-                            selected: false,
+                            title: "Restaurante",
+                            iconData: FontAwesomeIcons.utensils,
+                            selected: true,
                           ),
                           SizedBox(
                             width: 24,
@@ -247,16 +284,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       RecommendCard(
-                        imageUrl: 'assets/images/casa_velha.png',
+                        imageUrl: 'assets/images/casa3-universidade.jpeg',
                         title: "Casa próxima à UNEB!",
-                        offerEnds: "A oferta acabará em XX Horas ",
-                        startPrices: r"Apenas R$5000,00!",
+                        offerEnds: "A oferta acabará em 16 Horas ",
+                        startPrices: r"Apenas R$750,00!",
                       ),
                       RecommendCard(
-                        imageUrl: 'assets/images/casa_nova.png',
-                        title: "Casa próxima à praça Kennedy",
-                        offerEnds: "A oferta acabará em XX horas",
-                        startPrices: r"Apenas R$1500,00!",
+                        imageUrl: 'assets/images/casa2-hospital.png',
+                        title: "Casa próxima à Hospital HCA",
+                        offerEnds: "A oferta acabará em 15 horas",
+                        startPrices: r"Apenas R$850,00!",
                       ),
                     ],
                   ),
@@ -322,7 +359,7 @@ class NavigationDrawer extends StatelessWidget {
     child: Column(
       children: [CircleAvatar(
         radius: 52,
-        backgroundImage: NetworkImage('https://www.pexels.com/photo/city-sunset-man-people-14520644/'),
+        backgroundImage: AssetImage('assets/images/mulher.jpg'),
       ),
         Text('Maria Joaquina', style: TextStyle(fontSize: 16, color: Colors.white),)
       ],
@@ -344,7 +381,7 @@ class NavigationDrawer extends StatelessWidget {
           leading: const Icon(Icons.map_outlined),
           title: const Text('Mapa'),
           onTap: () =>
-              Navigator.of(context).push(_rotaHome())
+              Navigator.of(context).push(_rotaMapa())
         ),
         Divider(color: Colors.black54),
         ListTile(

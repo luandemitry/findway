@@ -4,12 +4,12 @@ import 'package:teste_grafos/repositories/casa_repo.dart';
 
 const primaryColor = Color(0xFFf345e2);
 
-class PaginaCasas extends StatelessWidget {
-  const PaginaCasas({Key? key}) : super(key: key);
+class PaginaCasas3 extends StatelessWidget {
+  const PaginaCasas3({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final tabela = CasaRepo.tabela;
+    final tabela_3 = CasaRepo.tabela_3;
 
     return Scaffold(
       appBar: AppBar(
@@ -22,17 +22,17 @@ class PaginaCasas extends StatelessWidget {
                 leading: SizedBox(
                   height: 200,
                   width: 100,
-                  child: Image.asset(tabela[casa].imagem),
+                  child: Image.asset(tabela_3[casa].imagem),
                 ) ,
-                title: Text(tabela[casa].nome),
-                trailing: Text(tabela[casa].preco.toString(), style: TextStyle(
+                title: Text(tabela_3[casa].nome),
+                trailing: Text(tabela_3[casa].preco.toString(), style: TextStyle(
                   fontWeight: FontWeight.bold
                 ),)
             );
           },
           padding: EdgeInsets.all(16),
           separatorBuilder: (_,___) => Divider(),
-          itemCount: tabela.length),
+          itemCount: tabela_3.length),
     );
   }
 }

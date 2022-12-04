@@ -1,36 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:teste_grafos/repositories/casa_repo.dart';
-
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const primaryColor = Color(0xFFf345e2);
 
-class PaginaCasas3 extends StatelessWidget {
-  const PaginaCasas3({Key? key}) : super(key: key);
+class PaginaCasas4 extends StatefulWidget {
+  const PaginaCasas4({Key? key}) : super(key: key);
+
+  @override
+  State<PaginaCasas4> createState() => _PaginaCasas4State();
+}
+
+class _PaginaCasas4State extends State<PaginaCasas4> {
+  static const _initialCameraPosition =
+      CameraPosition(target: LatLng(-12.177791, -38.413255), zoom: 11.5);
+
+   late GoogleMapController _googleMapController;
+
+  @override
+  void dispose(){
+    _googleMapController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final tabela_2 = CasaRepo.tabela_2;
-
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        title: Text('Casas'),
+      body: GoogleMap(
+        initialCameraPosition: _initialCameraPosition,
+        onMapCreated: (controller)=> _googleMapController = controller,
       ),
-      body: ListView.separated(
-          itemBuilder: (BuildContext context, int casa) {
-            return ListTile(
-                leading: SizedBox(
-                  height: 200,
-                  width: 100,
-                  child: Image.asset(tabela_2[casa].imagem),
-                ),
-                title: Text(tabela_2[casa].nome),
-                trailing: Text(tabela_2[casa].preco.toString())
-            );
-          },
-          padding: EdgeInsets.all(16),
-          separatorBuilder: (_, ___) => Divider(),
-          itemCount: tabela_2.length),
     );
   }
 }

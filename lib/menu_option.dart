@@ -15,13 +15,13 @@ class MenuOption extends StatelessWidget {
         aspectRatio: 1,
         child: Container(
           decoration: BoxDecoration(
-            color: selected ? Color(0xFFf345e2) : Colors.grey[200],
+            color: selected ? Colors.pinkAccent : Colors.grey[200],
             borderRadius: BorderRadius.all(
               Radius.circular(25),
             ),
             boxShadow: [
               BoxShadow(
-                color: selected ? Color(0xFFf345e2).withOpacity(0.2) : Colors.transparent,
+                color: selected ? Colors.pinkAccent.withOpacity(0.2) : Colors.transparent,
                 spreadRadius: 4,
                 blurRadius: 7,
                 offset: Offset(0, 3),
@@ -43,7 +43,7 @@ class MenuOption extends StatelessWidget {
                 title,
                 style: TextStyle(
                   color: selected ? Colors.white : Colors.grey[500],
-                  fontSize: 15,
+                  fontSize: 14,
                 )
               )
             ],
