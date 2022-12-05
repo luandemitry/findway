@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:teste_grafos/repositories/casa_repo.dart';
+
+import 'casa_detalhes.dart';
+import 'models/casas.dart';
 
 class RecommendCard extends StatelessWidget {
-
+  final tabela_2 = CasaRepo.tabela_2;
   final String imageUrl;
   final String title;
   final String offerEnds;
@@ -10,17 +14,22 @@ class RecommendCard extends StatelessWidget {
 
   RecommendCard({required this.imageUrl, required this.title, required this.offerEnds, required this.startPrices});
 
+  get casa => casa;
+
   @override
   Widget build(BuildContext context) {
+
+    mostrarDetalhes(Casa casa) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => CasasDetalhes(casa: casa)));
+    }
     return Card(
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: InkWell(
-        onTap: () {
-          print("Ir para oferta!");
-        },
+        onTap: () => mostrarDetalhes(tabela_2[casa]),
         child: Container(
           width: 380,
           child: Row(
@@ -45,7 +54,7 @@ class RecommendCard extends StatelessWidget {
                       title,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16, 
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -87,7 +96,7 @@ class RecommendCard extends StatelessWidget {
                         fontSize: 12,
                       ),
                     ),
-                    
+
                   ],
                 ),
               ),

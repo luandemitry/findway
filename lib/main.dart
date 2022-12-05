@@ -7,7 +7,11 @@ import 'package:teste_grafos/menu_option.dart';
 import 'package:teste_grafos/recommend_card.dart';
 import 'package:teste_grafos/casas_page.dart';
 import 'package:teste_grafos/map.dart';
+import 'package:teste_grafos/repositories/casa_repo.dart';
 import 'package:teste_grafos/teste.dart';
+
+import 'casa_detalhes.dart';
+import 'models/casas.dart';
 
 void main() {
   runApp(MyApp());
@@ -104,6 +108,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+   
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -122,14 +129,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  get casa => casa;
   int _page = 0;
   final screens = [
     MyHomePage(),
     PaginaCasas4(),
   ];
 
+
   @override
   Widget build(BuildContext context) {
+    final tabela_2 = CasaRepo.tabela_2;
+
+    mostrarDetalhes(Casa casa) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => CasasDetalhes(casa: casa)));
+    }
+    
     return Scaffold(
       drawer: const NavigationDrawer(),
       appBar: AppBar(
@@ -176,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           MenuOption(
                             title: "Terminal",
                             iconData: FontAwesomeIcons.bus,
-                            selected: false,
+                            selected: true,
                           ),
                         ],
                       ),
@@ -244,7 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           MenuOption(
                               title: "Mais",
                               iconData: FontAwesomeIcons.ellipsisVertical,
-                              selected: false),
+                              selected: true),
                         ],
                       ),
                     ),
@@ -279,25 +295,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   height: 130,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      RecommendCard(
-                        imageUrl: 'assets/images/casa3-universidade.jpeg',
-                        title: "Casa próxima à UNEB!",
-                        offerEnds: "A oferta acabará em 16 Horas ",
-                        startPrices: r"Apenas R$750,00!",
-                      ),
-                      RecommendCard(
-                        imageUrl: 'assets/images/casa2-hospital.png',
-                        title: "Casa próxima à Hospital HCA",
-                        offerEnds: "A oferta acabará em 15 horas",
-                        startPrices: r"Apenas R$850,00!",
-                      ),
-                    ],
+                  child: GestureDetector(
+                    onTap: () => mostrarDetalhes(tabela_2[casa]),
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        RecommendCard(
+                          imageUrl: 'assets/images/casa3-universidade.jpeg',
+                          title: "Casa próxima à UNEB!",
+                          offerEnds: "A oferta acabará em 16 Horas ",
+                          startPrices: r"Apenas R$750,00!",
+                        ),
+                        RecommendCard(
+                          imageUrl: 'assets/images/casa2-hospital.png',
+                          title: "Casa próxima à Hospital HCA",
+                          offerEnds: "A oferta acabará em 15 horas",
+                          startPrices: r"Apenas R$850,00!",
+                        ),
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

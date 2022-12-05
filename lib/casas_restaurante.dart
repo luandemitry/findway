@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:teste_grafos/repositories/casa_repo.dart';
-
+import 'models/casas.dart';
+import 'package:teste_grafos/casa_detalhes.dart';
 
 const primaryColor = Color(0xFFf345e2);
 
 class PaginaCasas3 extends StatelessWidget {
   const PaginaCasas3({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     final tabela_3 = CasaRepo.tabela_3;
 
+
+    mostrarDetalhes(Casa casa) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => CasasDetalhes(casa: casa)));
+    }
+
+    ;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -27,7 +36,9 @@ class PaginaCasas3 extends StatelessWidget {
                 title: Text(tabela_3[casa].nome),
                 trailing: Text(tabela_3[casa].preco.toString(), style: TextStyle(
                   fontWeight: FontWeight.bold
-                ),)
+                ),
+                ),
+              onTap: () => mostrarDetalhes(tabela_3[casa]),
             );
           },
           padding: EdgeInsets.all(16),
